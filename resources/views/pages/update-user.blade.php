@@ -101,6 +101,7 @@
                                     <div class="mt-[10px]">
                                         <input type="text" id="phone" name="phone" value="{{old('phone',$user_detail->phone)}}" id="phone"
                                             class="outline-0 rounded-md border-0 py-[8.5px] text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#9CA3AF] px-2.5 text-sm w-full">
+                                            <input type="hidden" id="dial_code" name="dial_code" value="{{ old('dial_code', $user_detail->dial_code) ? old('dial_code', $user_detail->dial_code) : 91 }}">
                                     </div>
                                     @if($errors->has('phone'))
                                         <div class="text-red-600">{{ $errors->first('phone') }}</div>
@@ -136,6 +137,11 @@
         $("#filePreviewImage").attr('src',URL.createObjectURL(event.target.files[0]));
     });
 
+    $(document).on('click', '.iti__country', function () {
+        var dial_code = $(this).attr('data-dial-code');     
+        $('#dial_code').val(dial_code);
+    });
+
 
     $("#remove_photo").click(function(event){
         $("#filePreviewImage").attr('src','');
@@ -146,6 +152,9 @@
   const input = document.querySelector("#phone");
   window.intlTelInput(input, {
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.4.0/build/js/utils.js",
+    separateDialCode: true,
+    initialCountry: "IN",
+    
   });
 </script>
 @endsection

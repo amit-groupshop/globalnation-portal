@@ -68,8 +68,7 @@ class UserController extends Controller
 	                Rule::unique('users')->ignore($user_id,'id'),
 	            ],
 	            'phone' => [
-	                'required',
-	                'regex:/^[0-9]{10,15}$/',
+	                'required',	               
 	                Rule::unique('users')->ignore($user_id,'id'),
 	            ],
 	        ]);
@@ -78,7 +77,9 @@ class UserController extends Controller
 	        $update['first_name'] = $request->first_name;
 	        $update['last_name'] = $request->last_name;
 	        $update['email'] = $request->email;
-	        $update['phone'] = $request->phone;
+			$update['phone'] = $request->phone;
+			$update['role'] = $request->user_role;
+	        $update['dial_code'] = $request->dial_code;
 	        $update['designation'] = $request->designation;
 
 	        if ($request->filled('password')) {
