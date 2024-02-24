@@ -72,7 +72,6 @@ class UserController extends Controller
 	                Rule::unique('users')->ignore($user_id,'id'),
 	            ],
 	        ]);
-
 	       	$update['name'] = $request->name;
 	        $update['first_name'] = $request->first_name;
 	        $update['last_name'] = $request->last_name;
