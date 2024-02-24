@@ -48,15 +48,19 @@
                                         name="user_role"
                                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                                     >
-                                        @foreach(['Admin', 'Contributors', 'Viewers'] as $role)
+                                        @if(\Auth::user()->role == 'Super Admin')
+                                        @foreach(config('constants.roles') as $role => $permission)
                                             <option value="{{ $role }}" {{ old('role',$user_detail->role) ===  $role  ? 'selected' : ''}}>
                                             {{ ucfirst($role) }}
                                         </option>
 
                                         @endforeach
+                                        @else
+                                         <option value="Creators">Creators </option>
+                                        @endif
                                     </select>
                                     </div>
-                                </div>
+                                </div>                               
                             </div>
                         </div>
                         <div class="border-t border-gray-900/10 pt-10">
